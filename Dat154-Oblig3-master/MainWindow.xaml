@@ -1,0 +1,137 @@
+﻿<Window x:Class="Oblig3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Oblig3"
+        mc:Ignorable="d"
+        
+        Title="Viewer" Height="700" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.Row="1" Margin="10">
+            <TabItem Header="All Students">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <TextBox x:Name="searchBox" Width="400" Margin="0,0,10,0"/>
+                        <Button x:Name="searchButton" Content="Search" Click="searchButton_Click"/>
+                    </StackPanel>
+                    <ListView Name="studentList" ItemsSource="{Binding}" Grid.Row="1" Margin="0,0,918,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Width="250" Header="Student" DisplayMemberBinding="{Binding Path=Studentname}"/>
+                                    <GridViewColumn Width="150" Header="ID" DisplayMemberBinding="{Binding Path=Id}"/>
+                                    <GridViewColumn Width="150" Header="Age" DisplayMemberBinding="{Binding Path=Studentage}"/>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </TabItem>
+            
+            <TabItem Header="Course Students">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                        <ComboBox x:Name="courseComboBox" Width="150" ItemsSource="{Binding Courses}" DisplayMemberPath="Coursecode" SelectedValuePath="Coursecode" SelectedValue="{Binding SelectedCourseCode}" Margin="0,0,10,0"/>
+                        <Button x:Name="searchCourseButton" Content="Search" Click="searchCourseButton_Click"/>
+                    </StackPanel>
+                    <ListView Name="courseStudentList" ItemsSource="{Binding CourseStudents}" Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="175" Header="Student name" DisplayMemberBinding="{Binding Path=Studentname}"/>
+                                <GridViewColumn Width="175" Header="Student ID" DisplayMemberBinding="{Binding Path=Studentid}" />
+                                <GridViewColumn Width="175" Header="Course name" DisplayMemberBinding="{Binding Path=Coursename}" />
+                                <GridViewColumn Width="175" Header="Course code" DisplayMemberBinding="{Binding Path=Coursecode}" />
+                                <GridViewColumn Width="175" Header="Semester" DisplayMemberBinding="{Binding Path=Semester}" />
+                                <GridViewColumn Width="175" Header="Course Teacher" DisplayMemberBinding="{Binding Path=Teacher}" />
+                                <GridViewColumn Width="75" Header="Grade" DisplayMemberBinding="{Binding Path=Grade1}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Grade list">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                        <TextBox x:Name="gradeSearchBox" Width="150" Margin="0,0,10,0"/>
+                        <CheckBox x:Name="exactGradeCheckBox" Content="Exact Grade" Margin="0,0,10,0"></CheckBox>
+                        <Button x:Name="searchGradeButton" Content="Search" Click="searchGradeButton_Click"/>
+                    </StackPanel>
+                    <ListView Name="GradeList" ItemsSource="{Binding Grades}" RenderTransformOrigin="0.52,0.504" Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="125" Header="Student name" DisplayMemberBinding="{Binding Path=Studentname}"/>
+                                <GridViewColumn Width="125" Header="Student ID" DisplayMemberBinding="{Binding Path=Studentid}" />
+                                <GridViewColumn Width="125" Header="Course name" DisplayMemberBinding="{Binding Path=Coursename}" />
+                                <GridViewColumn Width="125" Header="Course code" DisplayMemberBinding="{Binding Path=Coursecode}" />
+                                <GridViewColumn Width="125" Header="Semester" DisplayMemberBinding="{Binding Path=Semester}" />
+                                <GridViewColumn Width="125" Header="Course Teacher" DisplayMemberBinding="{Binding Path=Teacher}" />
+                                <GridViewColumn Width="125" Header="Grade" DisplayMemberBinding="{Binding Path=Grade1}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Failed List">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                        <Button x:Name="failedSearchButton" Content="Search Failed" Click="searchFailedButton_Click"/>
+                    </StackPanel>
+                    <ListView Name="FailedList" Margin="10" ItemsSource="{Binding FailedGrades}" Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="125" Header="Student name" DisplayMemberBinding="{Binding Path=Studentname}"/>
+                                <GridViewColumn Width="125" Header="Student ID" DisplayMemberBinding="{Binding Path=Studentid}" />
+                                <GridViewColumn Width="125" Header="Course name" DisplayMemberBinding="{Binding Path=Coursename}" />
+                                <GridViewColumn Width="125" Header="Course code" DisplayMemberBinding="{Binding Path=Coursecode}" />
+                                <GridViewColumn Width="125" Header="Semester" DisplayMemberBinding="{Binding Path=Semester}" />
+                                <GridViewColumn Width="125" Header="Course Teacher" DisplayMemberBinding="{Binding Path=Teacher}" />
+                                <GridViewColumn Width="125" Header="Grade" DisplayMemberBinding="{Binding Path=Grade1}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Manage Participants">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Text="Course Code:" Width="100" VerticalAlignment="Center"/>
+                        <TextBox x:Name="courseIdTextBox" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Text="Student ID:" Width="100" VerticalAlignment="Center"/>
+                        <TextBox x:Name="studentIdTextBox" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Text="Grade:" Width="100" VerticalAlignment="Center"/>
+                        <TextBox x:Name="gradeTextBox" Width="200"/>
+                    </StackPanel>
+                    <Button x:Name="addStudentButton" Content="Add Student to Course" Click="addStudentButton_Click" Width="150" HorizontalAlignment="Left" Margin="10 5 0 0"/>
+                    <Button x:Name="removeStudentButton" Content="Remove Student from Course" Click="removeStudentButton_Click" Width="150" HorizontalAlignment="Left" Margin="10 5 0 0"/>
+                    <TextBlock x:Name="participantResultTextBlock" Margin="0 10 0 0"/>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
